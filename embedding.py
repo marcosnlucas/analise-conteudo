@@ -773,17 +773,29 @@ html_head = """<!DOCTYPE html>
                             </ul>
                         </div>
                     </div>
-
+                    
                     <div>
                         <h3 class="font-medium text-gray-800 mb-2">Mapa de Calor das Dimensões</h3>
                         <img id="heatmap-chart" class="w-full h-auto" alt="Mapa de calor das dimensões" />
                         <div class="mt-4 text-sm text-gray-600">
                             <strong>Como interpretar:</strong>
                             <ul class="list-disc ml-4">
-                                <li>Cores quentes (vermelho) indicam conceitos fortemente presentes</li>
-                                <li>Cores frias (azul) indicam conceitos ausentes</li>
-                                <li>Áreas com cores similares mostram consistência temática</li>
-                                <li>Muita variação de cores indica mudanças de tema</li>
+                                <li><strong>Pontos Pretos:</strong> Cada ponto representa uma frase do texto. Frases próximas são semanticamente similares.</li>
+                                <li><strong>Cores e Intensidade:</strong>
+                                    <ul class="list-disc ml-4">
+                                        <li>Vermelho (centro): Alta densidade de frases similares</li>
+                                        <li>Azul (bordas): Baixa densidade de frases</li>
+                                        <li>Branco (transição): Densidade média</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Interpretação:</strong>
+                                    <ul class="list-disc ml-4">
+                                        <li>Centro vermelho: Tema principal ou mensagem central</li>
+                                        <li>Pontos próximos: Frases com assuntos relacionados</li>
+                                        <li>Pontos distantes: Aspectos diferentes ou complementares</li>
+                                        <li>Gradiente suave: Indica boa coesão textual</li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </div>
