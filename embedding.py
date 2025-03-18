@@ -20,9 +20,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configuração do OpenAI
-openai_client = OpenAI(
-    api_key=os.getenv('OPENAI_API_KEY')
-)
+openai_client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 # Configuração do Flask
 app = Flask(__name__)
