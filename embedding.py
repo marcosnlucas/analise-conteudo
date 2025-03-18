@@ -195,7 +195,7 @@ def analyze_with_openai(clusters):
         clusters_text = []
         for cluster in clusters:
             cluster_text = (
-                f"Grupo #{cluster['id']+1}: {cluster['tipo']} {cluster['relevância']}\n"
+                f"Grupo {cluster['id']}: {cluster['tipo']} {cluster['relevância']}\n"
                 f"- Força: {cluster['força_relativa']:.2f}x média\n"
                 f"- Tamanho: {cluster['size']} características\n"
                 f"- Valor médio: {cluster['avg_value']:.4f}\n"
@@ -321,8 +321,8 @@ def generate_plots(analysis, text):
             
             # Criar o heatmap
             sns.set_style("whitegrid")
-            colors = ["#f7fbff", "#08306b"]  # Do azul claro ao azul escuro
-            cmap = LinearSegmentedColormap.from_list("custom_blues", colors)
+            cmap = sns.diverging_palette(220, 20, as_cmap=True)  # Do azul ao vermelho
+            
             heatmap = plt.hist2d(
                 reshaped_embedding[:, 0],
                 reshaped_embedding[:, 1],
@@ -983,7 +983,7 @@ html_head = """<!DOCTYPE html>
                                 clusterEl.innerHTML = 
                                     '<div class="flex items-center justify-between">' +
                                         '<h3 class="font-medium text-gray-800">' +
-                                            'Grupo #' + id + ': ' + tipo +
+                                            'Grupo ' + id + ': ' + tipo +
                                             '<span class="ml-2 px-2 py-1 text-sm rounded ' + relevanciaClass + '">' +
                                                 'Relevância ' + relevancia +
                                             '</span>' +
