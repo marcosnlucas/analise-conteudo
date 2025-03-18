@@ -14,6 +14,7 @@ import re
 from sklearn.cluster import KMeans
 import scipy.stats as stats
 from dotenv import load_dotenv
+import seaborn as sns
 
 # Carrega variáveis de ambiente
 load_dotenv()
@@ -319,11 +320,16 @@ def generate_plots(analysis, text):
             reshaped_embedding = embedding.reshape(matrix_size)
             
             # Criar o heatmap
-            sns.heatmap(reshaped_embedding, 
-                       cmap='RdBu_r',
-                       center=0,
-                       vmin=-0.15,
-                       vmax=0.20)
+            sns.set_style("whitegrid")
+            colors = ["#f7fbff", "#08306b"]  # Do azul claro ao azul escuro
+            cmap = LinearSegmentedColormap.from_list("custom_blues", colors)
+            heatmap = plt.hist2d(
+                reshaped_embedding[:, 0],
+                reshaped_embedding[:, 1],
+                bins=50,
+                cmap=cmap
+            )
+            plt.colorbar(heatmap[3])
             
             plt.title('Mapa de Calor das Dimensões')
             plt.xlabel('Grupo de Dimensões')
