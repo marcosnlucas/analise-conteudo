@@ -6,8 +6,7 @@ import base64
 from flask import Flask, request, jsonify, render_template_string
 from flask_cors import CORS
 import json
-from openai import OpenAI
-import seaborn as sns
+import openai
 from sklearn.decomposition import PCA
 from matplotlib.colors import LinearSegmentedColormap
 import unidecode
@@ -20,7 +19,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configuração do OpenAI
-openai_client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 # Configuração do Flask
 app = Flask(__name__)
@@ -46,7 +45,7 @@ app.json_encoder = NumpyEncoder
 
 def get_embedding(text):
     try:
-        response = openai_client.embeddings.create(
+        response = openai.Embedding.create(
             input=text,
             model="text-embedding-3-small"
         )
@@ -193,9 +192,9 @@ def analyze_with_openai(clusters):
     try:
         # Prepara os dados dos clusters para a análise
         clusters_text = []
-        for i, cluster in enumerate(clusters):
+        for cluster in clusters:
             cluster_text = (
-                f"Grupo #{i+1}: {cluster['tipo']} {cluster['relevância']}\n"
+                f"Grupo #{cluster['id']+1}: {cluster['tipo']} {cluster['relevância']}\n"
                 f"- Força: {cluster['força_relativa']:.2f}x média\n"
                 f"- Tamanho: {cluster['size']} características\n"
                 f"- Valor médio: {cluster['avg_value']:.4f}\n"
@@ -235,7 +234,7 @@ Por favor, estruture sua resposta em duas seções:
 Use uma linguagem clara e profissional, mantendo o foco em insights acionáveis."""
 
         # Faz a chamada para a API
-        response = openai_client.chat.completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-4-0125-preview",
             messages=[
                 {"role": "system", "content": "Você é um especialista em análise semântica de texto e SEO."},
