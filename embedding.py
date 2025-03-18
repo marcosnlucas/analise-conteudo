@@ -323,13 +323,23 @@ def generate_plots(analysis, text):
             sns.set_style("whitegrid")
             cmap = sns.diverging_palette(220, 20, as_cmap=True)  # Do azul ao vermelho
             
-            heatmap = plt.hist2d(
+            sns.kdeplot(
+                x=reshaped_embedding[:, 0],
+                y=reshaped_embedding[:, 1],
+                cmap=cmap,
+                fill=True,
+                levels=20
+            )
+            
+            plt.scatter(
                 reshaped_embedding[:, 0],
                 reshaped_embedding[:, 1],
-                bins=50,
-                cmap=cmap
+                c='black',
+                alpha=0.5,
+                s=30
             )
-            plt.colorbar(heatmap[3])
+            
+            plt.colorbar()
             
             plt.title('Mapa de Calor das Dimensões')
             plt.xlabel('Grupo de Dimensões')
