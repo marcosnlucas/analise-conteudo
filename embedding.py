@@ -606,12 +606,101 @@ html_head = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análise de Conteúdo</title>
+    <title>Análise Semântica de Conteúdos</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #001B3D;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .dashboard-logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .header-button {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .header-button.outline {
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .header-button.outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Ajuste para o conteúdo não ficar embaixo do header fixo */
+        body {
+            padding-top: 80px;
+        }
+    </style>
 </head>
 <body class="bg-gray-100 min-h-screen">
+    <header class="dashboard-header">
+        <a href="https://interno.webestrategica.com.br" class="logo-link">
+            <img 
+                src="https://webestrategica.com.br/wp-content/uploads/2023/12/logo-webestrategica-v2.webp" 
+                alt="Web Estratégica Logo" 
+                class="dashboard-logo"
+            />
+        </a>
+        <div style="display: flex; gap: 8px; align-items: center">
+            <button 
+                onclick="window.open('https://sites.google.com/webestrategica.com.br/oraculo/home', '_blank')"
+                class="header-button"
+            >
+                Oráculo
+            </button>
+            <button 
+                onclick="window.open('https://drive.google.com/drive/folders/1ynQGqFUDmBgl6ghE6iW8BTCf9zJ8RiJS?usp=sharing', '_blank')"
+                class="header-button"
+            >
+                Projetos
+            </button>
+            <button 
+                onclick="console.log('Logout clicked')" 
+                class="header-button outline"
+            >
+                Sair
+            </button>
+        </div>
+    </header>
+
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-8">Análise de Texto</h1>
+        <h1 class="text-3xl font-bold mb-8">Análise Semântica de Conteúdos</h1>
         
         <!-- Formulário -->
         <form id="analyzeForm" class="mb-8">
